@@ -1,0 +1,44 @@
+{
+  "lib-name": "ColorWheel2",
+  "demo-dir": "docs",
+  "build-dir": "build",
+  
+  "name": "colorwheel2",
+  "version": "1.0.0",
+  "description": "Simple HSV color wheel library",
+  
+  "main": "build/ColorWheel2.js",
+  "jsnext:main": "build/ColorWheel2.es.js",
+  "module": "build/ColorWheel2.es.js",
+  
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp",
+    "dev": "NODE_ENV=development gulp dev:all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keupoz/ColorWheel2.git"
+  },
+  "author": "keupoz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/keupoz/ColorWheel2/issues"
+  },
+  "homepage": "https://github.com/keupoz/ColorWheel2#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "gulp": "^4.0.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-if": "^2.0.2",
+    "gulp-newer": "^1.4.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-stylus": "^2.7.0",
+    "rimraf": "^2.6.3",
+    "rollup": "^1.6.0",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-json": "^3.1.0",
+    "uglify-js": "^3.4.9"
+  },
+  "dependencies": {}
+}
