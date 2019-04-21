@@ -907,12 +907,12 @@ ColorWheel.prototype.updateCursor = function updateCursor () {
 };
   
 ColorWheel.prototype.relate = function relate (point) {
-  var el = this.domElement;
+  var rect = this.domElement.getBoundingClientRect();
     var ref = this.options;
     var center = ref.center;
     
-  point.x =point.x - el.offsetLeft - center;
-  point.y = -point.y + el.offsetTop+ center;
+  point.x =point.x - rect.left - center;
+  point.y = -point.y + rect.top+ center;
     
   return point;
 };
@@ -1043,7 +1043,7 @@ ColorWheel.prototype.dragStart = function dragStart (e) {
   body.addEventListener(cancel, removeHandlers);
 };
 
-var version = "1.0.0";
+var version = "1.0.1";
 
 ColorWheel.version = version;
 

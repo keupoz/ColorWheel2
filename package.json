@@ -2,15 +2,12 @@
   "lib-name": "ColorWheel2",
   "demo-dir": "docs",
   "build-dir": "build",
-  
   "name": "colorwheel2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple HSV color wheel library",
-  
   "main": "build/ColorWheel2.js",
   "jsnext:main": "build/ColorWheel2.es.js",
   "module": "build/ColorWheel2.es.js",
-  
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp",

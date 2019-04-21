@@ -111,11 +111,11 @@ export default class ColorWheel {
   }
   
   relate (point) {
-    let el = this.domElement,
+    let rect = this.domElement.getBoundingClientRect(),
         { center } = this.options;
     
-    point.x =  point.x - el.offsetLeft - center;
-    point.y = -point.y + el.offsetTop  + center;
+    point.x =  point.x - rect.left - center;
+    point.y = -point.y + rect.top  + center;
     
     return point;
   }
