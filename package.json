@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/keupoz/ColorWheel2#readme",
   "devDependencies": {
-    "browser-sync": "^2.26.3",
+    "browser-sync": "^2.26.7",
     "gulp": "^4.0.0",
     "gulp-htmlmin": "^5.0.1",
     "gulp-if": "^2.0.2",
