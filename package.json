@@ -1,17 +1,15 @@
 {
-  "lib-name": "ColorWheel2",
-  "demo-dir": "docs",
-  "build-dir": "build",
   "name": "colorwheel2",
   "version": "1.1.0",
   "description": "Simple HSV color wheel library",
-  "main": "build/ColorWheel2.js",
-  "jsnext:main": "build/ColorWheel2.es.js",
-  "module": "build/ColorWheel2.es.js",
+  "main": "dist/ColorWheel2.js",
+  "jsnext:main": "dist/ColorWheel2.es.js",
+  "module": "dist/ColorWheel2.es.js",
+  "types": "dist/ColorWheel2.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp",
-    "dev": "NODE_ENV=development gulp dev:all"
+    "dev": "NODE_ENV=development gulp dev"
   },
   "repository": {
     "type": "git",
@@ -23,21 +21,20 @@
     "url": "https://github.com/keupoz/ColorWheel2/issues"
   },
   "homepage": "https://github.com/keupoz/ColorWheel2#readme",
+  "dependencies": {},
   "devDependencies": {
+    "@keupoz/buildtools": "github:keupoz/BuildTools",
+    "@types/browser-sync": "^2.26.0",
+    "@types/gulp": "^4.0.6",
     "browser-sync": "^2.26.7",
-    "gulp": "^4.0.0",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-if": "^2.0.2",
-    "gulp-newer": "^1.4.0",
-    "gulp-rename": "^1.4.0",
-    "gulp-stylus": "^2.7.0",
-    "rimraf": "^2.6.3",
-    "rollup": "^1.6.0",
-    "rollup-plugin-json": "^3.1.0",
+    "fs-extra": "^8.1.0",
+    "gulp": "^4.0.2",
+    "rollup-plugin-commonjs": "^10.0.1",
+    "rollup-plugin-dts": "^1.1.5",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-typescript": "^1.0.1",
+    "ts-node": "^8.3.0",
     "tslib": "^1.10.0",
-    "typescript": "^3.5.3",
-    "uglify-js": "^3.4.9"
-  },
-  "dependencies": {}
+    "typescript": "^3.5.3"
+  }
 }
