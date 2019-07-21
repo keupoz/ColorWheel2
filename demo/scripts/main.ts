@@ -1,14 +1,14 @@
-import ColorWheel from '../../build/ColorWheel2.es.js'
+import ColorWheel from '../../dist/ColorWheel2';
 
-let input  = document.querySelector('#tryInput'),
-    picker = new ColorWheel('#color-wheel', 256, function (eventCode, eventName) {
+let input = <HTMLInputElement> document.querySelector('#tryInput'),
+    picker = new ColorWheel('#color-wheel', 256, (eventCode, eventName) => {
       // Do nothing if color is changed by input
       // (because it updates it)
       if (eventCode == 3) return;
-      
+
       // Do nothing if color is chromatic
-      if (eventName == 'rotateWheel' && this.color.HSV[1] == 0) return;
-      
+      if (eventName == 'rotateWheel' && picker.color.HSV[1] == 0) return;
+
       updateInput();
     });
 
@@ -28,7 +28,7 @@ input.addEventListener('input', function () {
   } else {
     try {
       // Set color
-      picker.setColor('name', this.value);
+      picker.setColor('NAME', this.value);
 
       // Change background and value of input
       this.style.background = picker.color.hex;
