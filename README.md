@@ -1,4 +1,6 @@
 # ColorWheel 2
+Demo: https://keupoz.github.io/ColorWheel2/
+
 Touch-friendly HSV color picker. Uses one `canvas` tag and has it's own color manager.
 
 ## Usage
