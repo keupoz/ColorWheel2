@@ -4,12 +4,17 @@ Touch-friendly HSV color picker. Uses one `canvas` tag and has it's own color ma
 ## Usage
 ColorWheel2 is a UMD module, so you can include it via script tag or require statement. Also it can be imported as an ES module (use `ColorWheel2.es.js`)
 
+Install via npm:
+```bash
+npm i @keupoz/colorwheel2
+```
+
 ```html
 <script src="ColorWheel2.min.js"></script>
 ```
 
 ```javascript
-import ColorWheel from 'colorwheel2'
+import ColorWheel from '@keupoz/colorwheel2';
 // or
 const ColorWheel = require('./ColorWheel2.js');
 let picker = new ColorWheel('#output', 256, function (eventCode, eventName) {
