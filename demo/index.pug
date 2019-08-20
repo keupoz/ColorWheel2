@@ -1,24 +1,24 @@
 html
-  head
-    title ColorWheel Demo
+    head
+        title ColorWheel Demo
 
-    meta(name="viewport", content="width=device-width, user-scalable=no")
-    meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, user-scalable=no")
+        meta(charset="utf-8")
 
-    link(rel="stylesheet", href="index.css")
+        link(rel="stylesheet", href="index.css")
 
-  body
-    canvas#color-wheel
+    body
+        canvas#color-wheel
 
-    #intro
-      h1 ColorWheel2.js
-      #description The HSV color wheel with touch support. Now with integrated color manager!
+        #intro
+            h1 ColorWheel2.js
+            #description The HSV color wheel with touch support. Now with integrated color manager!
 
-      #try
-        label(for="tryInput") #{"Try: "}
-        input#tryInput(type="text", spellcheck="false", placeholder="Hex code")
+            #try
+                label(for="tryInput") #{"Try: "}
+                input#tryInput(type="text", spellcheck="false", placeholder="Hex code")
 
-    a#github-link(href="https://github.com/keupoz/ColorWheel2", target="_blank")
-      img(src="assets/github.svg", height="24")
+        a#github-link(href="https://github.com/keupoz/ColorWheel2", target="_blank")
+            img(src="assets/github.svg", height="24")
 
-    script(src="app.js")
+        script(src="app.js")

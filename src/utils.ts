@@ -1,44 +1,44 @@
-import { Tuple2 } from './@types/helpers';
-import { Point } from './@types/main';
+import { Tuple2 } from "./@types/helpers";
+import { Point } from "./@types/main";
 
-function clamp (min: number, max: number, number: number): number {
-  return Math.max(min, Math.min(number, max));
+function clamp(min: number, max: number, number: number): number {
+    return Math.max(min, Math.min(number, max));
 }
 
-export function clamp1 (number: number): number {
-  return clamp(0,1, number);
+export function clamp1(number: number): number {
+    return clamp(0, 1, number);
 }
 
-export function clamp360 (deg: number): number {
-  deg -= 360 * (deg / 360 | 0);
-  if (deg < 0) deg += 360;
-  return Math.round(deg);
+export function clamp360(deg: number): number {
+    deg -= 360 * (deg / 360 | 0);
+    if (deg < 0) deg += 360;
+    return Math.round(deg);
 }
 
-export function sv2sl (s: number, v: number): Tuple2<number> {
-  let a: number = (2 - s) * v;
+export function sv2sl(s: number, v: number): Tuple2<number> {
+    let a: number = (2 - s) * v;
 
-  s = s * v / (a <= 1 ? a : 2 - a) || 0;
-  v = a / 2;
+    s = s * v / (a <= 1 ? a : 2 - a) || 0;
+    v = a / 2;
 
-  return [ s, v ];
+    return [s, v];
 }
 
-export function sl2sv (s: number, l: number): Tuple2<number> {
-  s *= l < 0.5 ? l : 1 - l;
+export function sl2sv(s: number, l: number): Tuple2<number> {
+    s *= l < 0.5 ? l : 1 - l;
 
-  l += s;
-  s = 2 * s / l;
+    l += s;
+    s = 2 * s / l;
 
-  return [ s, l ];
+    return [s, l];
 }
 
-export function on (el: EventTarget, events: string, handler: (event: Event) => void): void {
-  events.split(' ').forEach(event => el.addEventListener(event, handler));
+export function on(el: EventTarget, events: string, handler: (event: Event) => void): void {
+    events.split(" ").forEach(event => el.addEventListener(event, handler));
 }
 
-export function getPoint (e: MouseEvent | TouchEvent): Point {
-  let touches = (<TouchEvent> e).changedTouches,
-      { clientX: x, clientY: y } = touches ? touches[0] : (<MouseEvent> e);
-  return { x, y };
+export function getPoint(e: MouseEvent | TouchEvent): Point {
+    let touches = (<TouchEvent>e).changedTouches,
+        { clientX: x, clientY: y } = touches ? touches[0] : (<MouseEvent>e);
+    return { x, y };
 }
