@@ -1,6 +1,16 @@
-type Tuple3<item> = [ item, item, item ];
+type Tuple3<item> = [item, item, item];
 
-declare class Color {
+interface ColorMethods {
+    setHSV: (h: number, s: number, v: number) => void;
+    setHSL: (h: number, s: number, l: number) => void;
+    setRGB: (r: number, g: number, b: number) => void;
+    setHEX: (hex: string) => void;
+    setName: (name: string) => void;
+    setNUM: (num: number) => void;
+    setHue: (hue: number) => void;
+    setSV: (s: number, v: number) => void;
+}
+declare class Color implements ColorMethods {
     HSV: Tuple3<number>;
     HSL: Tuple3<number>;
     RGB: Tuple3<number>;
@@ -29,19 +39,17 @@ declare class Color {
 }
 
 type ColorWheelCallback = (eventCode: number, eventName: string) => void;
-type ColorModel = 'NAME' | 'HUE' | 'RGB' | 'HSV' | 'HSL' | 'NUM' | 'HEX' | 'SV';
 
 declare class ColorWheel {
     static version: string;
     color: Color;
     domElement: HTMLCanvasElement;
-    private size;
     private layers;
     private options;
     private callback;
-    constructor(el: CanvasRenderingContext2D | HTMLCanvasElement | string, size: number, callback?: ColorWheelCallback);
+    constructor(el: CanvasRenderingContext2D | HTMLCanvasElement | string | null, size: number, callback?: ColorWheelCallback);
     setSize(size: number): void;
-    setColor(model: ColorModel, ...val: any[]): void;
+    update(): void;
     private updateCursor;
     private relate;
     private getHandler;
