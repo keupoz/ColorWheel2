@@ -33,12 +33,15 @@ export function sl2sv(s: number, l: number): Tuple2<number> {
     return [s, l];
 }
 
-export function on(el: EventTarget, events: string, handler: (event: Event) => void): void {
+export function on(el: EventTarget, events: string, handler: EventListener): void {
     events.split(" ").forEach(event => el.addEventListener(event, handler));
 }
 
-export function getPoint(e: MouseEvent | TouchEvent): Point {
-    let touches = (<TouchEvent>e).changedTouches,
-        { clientX: x, clientY: y } = touches ? touches[0] : (<MouseEvent>e);
+export function isTouchEvent(event: Event): event is TouchEvent {
+    return Array.isArray((event as TouchEvent).changedTouches);
+}
+
+export function getPoint(event: MouseEvent | TouchEvent): Point {
+    let { clientX: x, clientY: y } = isTouchEvent(event) ? event.changedTouches[0] : event;
     return { x, y };
 }

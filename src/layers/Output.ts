@@ -4,8 +4,8 @@ import Layer from "./Layer";
 export default class Output extends Layer {
     private layers: Layer[];
 
-    constructor(el: CanvasRenderingContext2D | HTMLCanvasElement | string, options: InternalOptions, ...layers: Layer[]) {
-        let ctx: CanvasRenderingContext2D = null;
+    constructor(el: CanvasRenderingContext2D | HTMLCanvasElement | string | null, options: InternalOptions, ...layers: Layer[]) {
+        let ctx: CanvasRenderingContext2D | null = null;
 
         if (typeof el == "string") el = document.querySelector(el) as HTMLCanvasElement;
 

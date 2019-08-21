@@ -1,21 +1,35 @@
 import { Tuple3 } from "./@types/helpers";
-import COLORS from "./csscolors.json";
+import COLORS_JSON from "./csscolors.json";
 import { clamp1, clamp360, sl2sv, sv2sl } from "./utils";
 
-const NAMES = {};
+type ColorsJSON = { [name: string]: string };
+
+const NAMES: ColorsJSON = {},
+    COLORS: ColorsJSON = COLORS_JSON;
 
 Object.keys(COLORS).forEach(name => {
     NAMES[COLORS[name]] = name;
 });
 
-export default class Color {
+interface ColorMethods {
+    setHSV: (h: number, s: number, v: number) => void;
+    setHSL: (h: number, s: number, l: number) => void;
+    setRGB: (r: number, g: number, b: number) => void;
+    setHEX: (hex: string) => void;
+    setName: (name: string) => void;
+    setNUM: (num: number) => void;
+    setHue: (hue: number) => void;
+    setSV: (s: number, v: number) => void;
+}
+
+export default class Color implements ColorMethods {
     public HSV: Tuple3<number>;
     public HSL: Tuple3<number>;
     public RGB: Tuple3<number>;
 
-    public num: number;
-    public hex: string;
-    public css: string;
+    public num: number = 0x000000;
+    public hex: string = "#000000";
+    public css: string = "";
 
     constructor(h: number, s: number, v: number) {
         this.HSV = [0, 0, 0];
@@ -158,7 +172,7 @@ export default class Color {
             vinc = vmin + a,
             vdec = v - a;
 
-        let c: Tuple3<number>;
+        let c!: Tuple3<number>;
 
         switch (h1) {
             case 0: c = [v, vinc, vmin]; break;

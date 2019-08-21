@@ -3,8 +3,8 @@ import { SATURATION_GRADIENT_Y_MULTIPLIER } from "../constants";
 import Layer from "./Layer";
 
 export default class Triangle extends Layer {
-    private brightnessGradient: CanvasGradient;
-    private saturationGradient: CanvasGradient;
+    private brightnessGradient!: CanvasGradient;
+    private saturationGradient!: CanvasGradient;
 
     constructor(options: InternalOptions) {
         super(null, null, options);

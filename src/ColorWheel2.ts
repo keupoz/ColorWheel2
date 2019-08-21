@@ -1,6 +1,6 @@
 import { version } from "../package.json";
 import { Tuple3 } from "./@types/helpers";
-import { ColorModel, ColorWheelCallback, InternalOptions, Point } from "./@types/main";
+import { ColorWheelCallback, InternalOptions, Point } from "./@types/main";
 import Color from "./Color";
 import { DEG, FULL_ARC, RAD_30, RAD_60, RAD_90, SIN_60 } from "./constants";
 import Background from "./layers/Background";
@@ -16,14 +16,11 @@ export default class ColorWheel {
     public color: Color;
     public domElement: HTMLCanvasElement;
 
-    private size: number;
     private layers: { [name: string]: Layer };
     private options: InternalOptions;
     private callback: ColorWheelCallback;
 
-    constructor(
-        el: CanvasRenderingContext2D | HTMLCanvasElement | string, size: number,
-        callback: ColorWheelCallback = () => { }) {
+    constructor(el: CanvasRenderingContext2D | HTMLCanvasElement | string | null, size: number, callback: ColorWheelCallback = () => { }) {
         let color = new Color(0, 1, 1);
 
         this.options = {
@@ -47,12 +44,10 @@ export default class ColorWheel {
 
         this.setSize(size);
 
-        on(this.domElement, "touchstart mousedown", this.dragStart.bind(this));
+        on(this.domElement, "touchstart mousedown", this.dragStart.bind(this) as EventListener);
     }
 
     public setSize(size: number): void {
-        this.size = size = +size;
-
         let center = size / 2, radius = center,
 
             spectreThickness = radius / 4,
@@ -84,33 +79,15 @@ export default class ColorWheel {
         this.layers.output.update();
     }
 
-    public setColor(model: ColorModel, ...val: any[]): void {
-        let methodName: string;
+    public update(): void {
+        this.options.hueRad = this.color.HSV[0] * DEG;
+        this.updateCursor();
 
-        switch (model) {
-            case "HUE":
-                methodName = "setHue";
-                break;
-            case "NAME":
-                methodName = "setName";
-                break;
-            default:
-                methodName = "set" + model;
-                break;
-        }
+        this.layers.triangle.render();
+        this.layers.cursor.render();
+        this.layers.output.render();
 
-        if (this.color[methodName]) {
-            this.color[methodName](...val);
-
-            this.options.hueRad = this.color.HSV[0] * DEG;
-            this.updateCursor();
-
-            if (model != "SV") this.layers.triangle.render();
-            this.layers.cursor.render();
-            this.layers.output.render();
-
-            this.callback.call(this, 3, methodName);
-        } else throw new TypeError(`ColorWheel: Unsupported color model (${model})`);
+        this.callback.call(this, 3, "update");
     }
 
 
@@ -140,21 +117,24 @@ export default class ColorWheel {
         return point;
     }
 
-    private getHandler(point: Point): [string, Function] {
+    private getHandler(point: Point): [string, Function] | null {
         let cursorDistance = Math.hypot(point.x, point.y),
-            { triangleRadius, radius } = this.options, handler: Function;
+            { triangleRadius, radius } = this.options,
+            handler: Function | undefined = undefined;
 
-        // Spectre wheel
-        if (cursorDistance >= triangleRadius && cursorDistance <= radius)
+        if (cursorDistance >= triangleRadius && cursorDistance <= radius) {
+            // Spectre wheel
             handler = this.rotateWheel;
-        // Triangle
-        else if (this.moveCursor(point, true))
+        } else if (this.moveCursor(point, true)) {
+            // Triangle
             handler = this.moveCursor;
+        }
 
-        if (handler)
+        if (handler) {
             return [handler.name, handler.bind(this)];
-        else
-            return [undefined, undefined];
+        } else {
+            return null;
+        }
     }
 
     private rotateWheel(point: Point): void {
@@ -171,7 +151,7 @@ export default class ColorWheel {
         this.layers.output.render();
     }
 
-    private moveCursor(point: Point, start: boolean): boolean {
+    private moveCursor(point: Point, start: boolean): boolean | void {
         let { x, y } = point,
             { hueRad, vertices, triangleSide, triangleHeight } = this.options,
             cursorDistance = Math.hypot(x, y), s: number, v: number;
@@ -227,9 +207,11 @@ export default class ColorWheel {
         if ("button" in e && e.button !== 0) return;
 
         let point = this.relate(getPoint(e)),
-            [name, handler] = this.getHandler(point);
+            handlerObj = this.getHandler(point);
 
-        if (!handler) return;
+        if (!handlerObj) return;
+
+        let [name, handler] = handlerObj;
 
         e.preventDefault();
 
@@ -243,10 +225,10 @@ export default class ColorWheel {
             end = touch ? "touchend" : "mouseup",
             cancel = touch ? "touchcancel" : "mouseleave";
 
-        let moveHandler = (e: MouseEvent | TouchEvent): void => {
+        let moveHandler = ((e: MouseEvent | TouchEvent): void => {
             handler(this.relate(getPoint(e)));
             this.callback(1, name);
-        };
+        }) as EventListener;
 
         let removeHandlers = (): void => {
             body.removeEventListener(move, moveHandler);

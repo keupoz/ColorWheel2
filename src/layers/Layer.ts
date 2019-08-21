@@ -7,11 +7,16 @@ export default abstract class Layer {
 
     protected abstract renderFn(): void;
 
-    constructor(el: HTMLCanvasElement, ctx: CanvasRenderingContext2D, options: InternalOptions) {
+    constructor(el: HTMLCanvasElement | null, ctx: CanvasRenderingContext2D | null, options: InternalOptions) {
         this.options = options;
 
         this.el = el || document.createElement("canvas");
-        this.ctx = ctx || this.el.getContext("2d");
+
+        ctx = ctx || this.el.getContext("2d");
+
+        if (ctx === null) throw new Error("Couldn't initialize canvas context");
+
+        this.ctx = ctx;
     }
 
     public setSize(size: number): void {

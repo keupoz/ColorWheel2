@@ -28,7 +28,8 @@ input.addEventListener("input", function () {
     } else {
         try {
             // Set color
-            picker.setColor("NAME", this.value);
+            picker.color.setName(this.value);
+            picker.update();
 
             // Change background and value of input
             this.style.background = picker.color.hex;
