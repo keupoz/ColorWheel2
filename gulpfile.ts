@@ -27,8 +27,7 @@ const DEMO = {
         },
         plugins: [
             RP.get("commonjs")(),
-            RP.get("json")(),
-            RP.get("typescript")(),
+            RP.get("typescript2")(),
             RP.get("uglify", PRODUCTION)()
         ],
         treeshake: PRODUCTION
@@ -70,7 +69,7 @@ const LIB = {
             },
         plugins: [
             RP.get("json")(),
-            RP.get("typescript")(),
+            RP.get("typescript2")(),
             RP.get("uglify", PRODUCTION)()
         ],
         treeshake: PRODUCTION
