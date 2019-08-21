@@ -32,7 +32,7 @@ let picker = new ColorWheel('#output', 256, function (eventCode, eventName) {
 new ColorWheel(canvas, size, callback);
 ```
 
-- **canvas** - CSS selector, `HTMLCanvasElement` or `CanvasRenderingContext2D`
+- **canvas** - CSS selector, `HTMLCanvasElement` or `CanvasRenderingContext2D`. Set to null to create new instances automatically
 - **size** - output canvas size in pixels
 - **callback** - called after each color change with arguments `eventCode` and `eventName`
 
@@ -40,12 +40,12 @@ new ColorWheel(canvas, size, callback);
 - `0`: interaction started
 - `1`: interaction continued
 - `2`: interaction ended
-- `3`: changed color via `setColor`
+- `3`: updated picker after changing color programmatically
 
 #### Event names
 - `rotateWheel`: changed hue
 - `moveCursor`: moved cursor
-- `setHSV`, `setHSL`, `setRGB`, `setNUM`, `setHEX`, `setName`, `setHue`: method name used to chagne the color using `setColor`. Event code is always `3`
+- `update`: updated picker. Event code is always `3`
 
 ### Properties
 
@@ -84,16 +84,9 @@ picker.setSize(300);
 ```
 
 #### ColorWheel.setColor
-Sets color
-
-**Supported models**:
-- `HSV`, `HSL`, `RGB`
-- `num`, `hex`, `name`
+Removed in 1.2.0. Use set methods from color instance and update picker via `picker.update()`. See `dist/ColorWheel2.d.ts` for color methods
 
 ```javascript
-picker.setColor('HSV', 180,1,1);
-picker.setColor('RGB', 255, 0, 128);
-picker.setColor('num', 0x1fb6f2);
-picker.setColor('hex', '#ff0000');
-picker.setColor('name', 'rebeccapurple');
+picker.setHSV(180,1,1);
+picker.update();
 ```
