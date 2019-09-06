@@ -38,7 +38,7 @@ export function on(el: EventTarget, events: string, handler: EventListener): voi
 }
 
 export function isTouchEvent(event: Event): event is TouchEvent {
-    return Array.isArray((event as TouchEvent).changedTouches);
+    return (event as TouchEvent).changedTouches instanceof TouchList;
 }
 
 export function getPoint(event: MouseEvent | TouchEvent): Point {
