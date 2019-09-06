@@ -8,7 +8,7 @@ import Cursor from "./layers/Cursor";
 import Layer from "./layers/Layer";
 import Output from "./layers/Output";
 import Triangle from "./layers/Triangle";
-import { getPoint, on } from "./utils";
+import { getPoint, isTouchEvent, on } from "./utils";
 
 export default class ColorWheel {
     public static version: string = version;
@@ -221,7 +221,8 @@ export default class ColorWheel {
 
         let { body } = document,
 
-            touch = "changedTouches" in e, move = touch ? "touchmove" : "mousemove",
+            touch = isTouchEvent(e),
+            move = touch ? "touchmove" : "mousemove",
             end = touch ? "touchend" : "mouseup",
             cancel = touch ? "touchcancel" : "mouseleave";
 
