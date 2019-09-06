@@ -1,6 +1,6 @@
 {
   "name": "@keupoz/colorwheel2",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Simple HSV color wheel library",
   "main": "dist/ColorWheel2.js",
   "jsnext:main": "dist/ColorWheel2.es.js",

@@ -4,7 +4,7 @@
   (global = global || self, global.ColorWheel2 = factory());
 }(this, function () { 'use strict';
 
-  var version = "1.2.0";
+  var version = "1.2.1";
 
   var aliceblue = "#f0f8ff";
   var antiquewhite = "#faebd7";
@@ -333,7 +333,7 @@
       events.split(" ").forEach(function (event) { return el.addEventListener(event, handler); });
   }
   function isTouchEvent(event) {
-      return Array.isArray(event.changedTouches);
+      return event.changedTouches instanceof TouchList;
   }
   function getPoint(event) {
       var _a = isTouchEvent(event) ? event.changedTouches[0] : event, x = _a.clientX, y = _a.clientY;
@@ -859,7 +859,7 @@
           e.preventDefault();
           handler(point);
           this.callback(0, name);
-          var body = document.body, touch = "changedTouches" in e, move = touch ? "touchmove" : "mousemove", end = touch ? "touchend" : "mouseup", cancel = touch ? "touchcancel" : "mouseleave";
+          var body = document.body, touch = isTouchEvent(e), move = touch ? "touchmove" : "mousemove", end = touch ? "touchend" : "mouseup", cancel = touch ? "touchcancel" : "mouseleave";
           var moveHandler = (function (e) {
               handler(_this.relate(getPoint(e)));
               _this.callback(1, name);
